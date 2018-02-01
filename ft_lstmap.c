@@ -5,16 +5,17 @@ t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 	t_list		*next;
 	t_list		*newlst;
 
-	next = lst;
-	while (next->next)
+	if (!(newlst = ft_lstnew(lst->content, lst->size)
+		return (NULL);
+	newlst = f(lst);
+	next = newlst;
+	while (lst)
 	{
-		newlst = ft_lstnew(lst->content, lst->content_size);
-		ft_lstadd(&next, newlst);
-		if (newlst == NULL)
+		if (!(newlst = ft_lstnew(lst->content, lst->content_size))
 			return (NULL);
+		ft_lstadd(&next, newlst);
 		newlst = f(lst);
-		newlst->next = lst;
-		lst = newlst;
+		lst = lst->next;
 	}
-	return (newlst);
+	return (next);
 }
